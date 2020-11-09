@@ -41,8 +41,7 @@ export default (params: IParams) => (WrappedComponent: ComponentType) => {
 
     injectors = getInjectors(this.context.store);
     render() {
-      return WrappedComponent;
-      // return <WrappedComponent {...this.props} />;
+      return <WrappedComponent {...this.props} />;
     }
   }
 

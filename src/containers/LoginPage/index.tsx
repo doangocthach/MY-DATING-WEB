@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,20 +12,21 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { History } from "history";
 // import axios from "axios";
 // import
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" to="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {"Copyright © "}
+//       <Link color="inherit" to="https://material-ui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,10 +60,29 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
+// interface NewHistory extends History {
+//   location: {
+//     state: {
+//       username: string;
+//     };
+//   };
+// }
 interface Iprops {
-  name?: string;
+  history: any;
 }
-const SignInSide: React.FC<Iprops> = (Props: Iprops) => {
+const SignInSide: React.FC<Iprops> = (props: Iprops) => {
+  const historyState = props.history && props.history.location.state;
+  const [body, setBody] = useState({
+    username: "",
+    password: "",
+  });
+  useEffect(() => {
+    if (historyState) {
+      setBody({ ...body, username: historyState.username });
+    }
+    // return () => {};
+  }, []);
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>
@@ -82,9 +102,9 @@ const SignInSide: React.FC<Iprops> = (Props: Iprops) => {
               margin="normal"
               required
               fullWidth
-              id="email"
               label="Email Address"
               name="email"
+              value={body.username}
               autoComplete="email"
               autoFocus
             />
@@ -93,6 +113,7 @@ const SignInSide: React.FC<Iprops> = (Props: Iprops) => {
               margin="normal"
               required
               fullWidth
+              value={body.password}
               name="password"
               label="Password"
               type="password"
@@ -120,9 +141,9 @@ const SignInSide: React.FC<Iprops> = (Props: Iprops) => {
                 <Link to="/register">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
+            {/* <Box mt={5}>
               <Copyright />
-            </Box>
+            </Box> */}
           </form>
         </div>
       </Grid>

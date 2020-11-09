@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback, memo } from "react";
-import Avatar from "@material-ui/core/Avatar";
+// import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
+import TextField from "../../components/CustomTextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -79,7 +78,6 @@ const SignUp: React.FC<Iprops> = (props: Iprops) => {
 
   const handleChangDate = useCallback(
     (date: Moment) => {
-      console.log(date.valueOf());
       setBody({
         ...body,
         birthDate: date,
@@ -101,7 +99,7 @@ const SignUp: React.FC<Iprops> = (props: Iprops) => {
     const newBody = {
       username: body.username,
       password: body.password,
-      birthDate: body.birthDate.valueOf(),
+      birthDate: body.birthDate && body.birthDate.valueOf(),
       firstName: body.firstName,
       lastName: body.lastName,
     };
@@ -111,21 +109,21 @@ const SignUp: React.FC<Iprops> = (props: Iprops) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        {/* <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
-        </Avatar>
+        </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
-              autoComplete="fname"
-              name="firstName"
               variant="outlined"
               required
-              fullWidth
-              onChange={(e) => setBody({ ...body, firstName: e.target.value })}
+              value={body.firstName}
+              onChange={(e: any) =>
+                setBody({ ...body, firstName: e.target.value })
+              }
               label="First Name"
               autoFocus
             />
@@ -134,20 +132,23 @@ const SignUp: React.FC<Iprops> = (props: Iprops) => {
             <TextField
               variant="outlined"
               required
-              fullWidth
+              value={body.lastName}
               label="Last Name"
-              onChange={(e) => setBody({ ...body, lastName: e.target.value })}
+              onChange={(e: any) =>
+                setBody({ ...body, lastName: e.target.value })
+              }
               name="lastName"
-              autoComplete="lname"
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               variant="outlined"
               required
-              fullWidth
               type="email"
-              onChange={(e) => setBody({ ...body, username: e.target.value })}
+              value={body.username}
+              onChange={(e: any) =>
+                setBody({ ...body, username: e.target.value })
+              }
               label="Email Address"
             />
           </Grid>
@@ -163,9 +164,11 @@ const SignUp: React.FC<Iprops> = (props: Iprops) => {
           <Grid item xs={12}>
             <TextField
               variant="outlined"
+              value={body.password}
               required
-              fullWidth
-              onChange={(e) => setBody({ ...body, password: e.target.value })}
+              onChange={(e: any) =>
+                setBody({ ...body, password: e.target.value })
+              }
               label="Password"
               type="password"
             />
@@ -179,7 +182,6 @@ const SignUp: React.FC<Iprops> = (props: Iprops) => {
         </Grid>
         <Button
           type="submit"
-          fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}

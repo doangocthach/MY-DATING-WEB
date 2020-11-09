@@ -19,7 +19,6 @@ export function registerFailure(error: any): action {
   };
 }
 export function registerSuccess(data: any): action {
-  console.log("data", data);
   return {
     type: REGISTER_SUCCESS,
     data,

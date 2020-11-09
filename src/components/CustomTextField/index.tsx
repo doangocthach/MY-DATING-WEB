@@ -8,7 +8,14 @@ interface Iprops {
   startIcon?: ComponentType;
   onChange: Function;
   value: any;
-  variant?: "filled" | "standard" | "outlined" | undefined;
+  required?: boolean;
+  variant?: "outlined" | "filled" | "standard" | undefined;
+  type?: any;
+  label?: string;
+  autoFocus?: boolean;
+  name?: string;
+  autoComplete?: string;
+  margin?: "normal" | "none" | "dense" | undefined;
 }
 
 const useStyle = makeStyles(() => ({
@@ -26,6 +33,13 @@ const CustomTextField: React.FC<Iprops> = (props: Iprops) => {
     startIcon,
     value,
     variant,
+    required,
+    type,
+    label,
+    autoFocus,
+    name,
+    autoComplete,
+    margin,
     ...rest
   } = props;
   const classes = useStyle();
@@ -39,7 +53,9 @@ const CustomTextField: React.FC<Iprops> = (props: Iprops) => {
     <TextField
       value={value}
       helperText={helperText}
-      variant={variant}
+      variant="outlined"
+      name={name}
+      required={required}
       inputProps={{
         className: inputClasses,
         endAdornment: endIcon && (
@@ -49,8 +65,14 @@ const CustomTextField: React.FC<Iprops> = (props: Iprops) => {
           <InputAdornment position="start">{startIcon}</InputAdornment>
         ),
       }}
+      margin={margin}
+      fullWidth
+      autoFocus={autoFocus}
+      autoComplete={autoComplete}
+      label={label}
       onChange={handleChange}
       disabled={readOnly}
+      type={type}
       {...rest}
     />
   );
@@ -58,6 +80,7 @@ const CustomTextField: React.FC<Iprops> = (props: Iprops) => {
 CustomTextField.defaultProps = {
   variant: "outlined",
   readOnly: false,
+  required: false,
 };
 
 export default memo(CustomTextField);

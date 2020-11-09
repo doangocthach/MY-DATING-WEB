@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import { Link, Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import {
@@ -8,29 +8,31 @@ import {
 import MomentUtils from "../../utils/MomentUtils";
 // import MomentUtils from "@date-io/moment";
 import moment from "moment";
-import AppPage from "../AppPage";
-import LoginPage from "../LoginPage";
-import RegisterPage from "../RegisterPage";
+import GlobalStyled from "../../global-style";
+import { routers } from "../../routes/routers";
 interface Iprops {
   name?: string;
 }
+interface RouterProps {
+  path: string;
+  component: ComponentType;
+}
 const App: React.FC<Iprops> = (props: Iprops) => {
   return (
-    // <LocalizationProvider dateAdapter={MomentUtils}>
     <MuiPickersUtilsProvider
       locale="vi"
       libInstance={moment}
       utils={MomentUtils}
     >
+      <GlobalStyled />
       <Router>
         <Switch>
-          <Route exact path="/login" component={LoginPage}></Route>
-          <Route exact path="/register" component={RegisterPage}></Route>
-          <Route path="/" component={AppPage}></Route>
+          {routers.map((props: RouterProps, key: any) => {
+            return <Route path={props.path} component={props.component} />;
+          })}
         </Switch>
       </Router>
     </MuiPickersUtilsProvider>
-    // </LocalizationProvider>
   );
 };
 
