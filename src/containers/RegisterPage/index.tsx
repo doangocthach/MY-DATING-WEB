@@ -50,6 +50,7 @@ interface Iprops {
   onCleanup: Function;
   history: History;
 }
+
 const SignUp: React.FC<Iprops> = (props: Iprops) => {
   useInjectReducer({ key: "registerPage", reducer });
   useInjectSaga({ key: "registerPage", saga });

@@ -1,6 +1,6 @@
 import RegisterPage from "../containers/RegisterPage/Loadable";
 import LoginPage from "../containers/LoginPage/Loadable";
-import AppPage from "../containers/AppPage/Loadable";
+import AppPage from "../containers/PreLoginPage/Loadable";
 
 export const routers = [
   {

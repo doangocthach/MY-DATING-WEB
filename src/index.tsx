@@ -6,13 +6,17 @@ import "./index.css";
 import App from "./containers/App";
 import * as serviceWorker from "./serviceWorker";
 import configureStore from "./configureStore";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { defaultTheme } from "./utils/themeConfig";
 const initialState = {};
 //create redux store with history
 const store = configureStore(initialState, history);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App name="Thach" />
+    <ThemeProvider theme={defaultTheme}>
+      <App name="Thach" />
+    </ThemeProvider>
   </Provider>,
   document.getElementById("root")
 );

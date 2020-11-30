@@ -28,6 +28,7 @@ export default function request(url: string, options: any) {
     {
       // Authorization: localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN),
       "Content-Type": "application/json;charset=UTF-8",
+      "x-access-token": accessToken,
     },
     options.headers
   );

@@ -17,7 +17,7 @@ export const METHOD_REQUEST = {
 };
 
 export const LOCAL_STORAGE = {
-  ACCESS_TOKEN: "accessToken",
+  ACCESS_TOKEN: "x-access-token",
 };
 
 export const STATUS_CODE = {

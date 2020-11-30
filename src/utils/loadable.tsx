@@ -1,5 +1,5 @@
 import React, { ComponentType, lazy, Suspense } from "react";
-
+import Loading from "../components/Loading/Loading";
 const loadable = (
   importFunction: () => Promise<{ default: ComponentType<any> }>,
   fallback?: any
@@ -7,7 +7,7 @@ const loadable = (
   const LazyLoadingComponent = lazy(importFunction);
 
   return (props: any) => (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <LazyLoadingComponent {...props} />
     </Suspense>
   );
