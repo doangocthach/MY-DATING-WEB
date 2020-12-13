@@ -22,41 +22,41 @@ interface IParams {
   mode?: string;
 }
 // export default ({ key, saga, mode }) => (WrappedComponent) => {
-export default (params: IParams) => (WrappedComponent: ComponentType) => {
-  const { key, mode, saga } = params;
-  class InjectSaga extends React.Component {
-    static WrappedComponent = WrappedComponent;
-    static displayName = `withSaga(${
-      WrappedComponent.displayName || WrappedComponent.name || "Component"
-    })`;
-    static contextTypes = {
-      // eslint-disable-next-line react/forbid-prop-types
-      store: PropTypes.object.isRequired,
-    };
+// export default (params: IParams) => (WrappedComponent: ComponentType) => {
+//   const { key, mode, saga } = params;
+//   class InjectSaga extends React.Component {
+//     static WrappedComponent = WrappedComponent;
+//     static displayName = `withSaga(${
+//       WrappedComponent.displayName || WrappedComponent.name || "Component"
+//     })`;
+//     static contextTypes = {
+//       // eslint-disable-next-line react/forbid-prop-types
+//       store: PropTypes.object.isRequired,
+//     };
 
-    // eslint-disable-next-line camelcase
-    UNSAFE_componentWillMount() {
-      const { injectSaga } = this.injectors;
+//     // eslint-disable-next-line camelcase
+//     UNSAFE_componentWillMount() {
+//       const { injectSaga } = this.injectors;
 
-      injectSaga(key, { saga, mode }, this.props);
-    }
+//       injectSaga(key, { saga, mode }, this.props);
+//     }
 
-    componentWillUnmount() {
-      const { ejectSaga } = this.injectors;
+//     componentWillUnmount() {
+//       const { ejectSaga } = this.injectors;
 
-      ejectSaga(key);
-    }
+//       ejectSaga(key);
+//     }
 
-    injectors = getInjectors(this.context.store);
+//     injectors = getInjectors(this.context.store);
 
-    render() {
-      return WrappedComponent;
-      // return <WrappedComponent {...this.props} />;
-    }
-  }
+//     render() {
+//       return WrappedComponent;
+//       // return <WrappedComponent {...this.props} />;
+//     }
+//   }
 
-  return hoistNonReactStatics(InjectSaga, WrappedComponent);
-};
+//   return hoistNonReactStatics(InjectSaga, WrappedComponent);
+// };
 
 const useInjectSaga = (params: IParams) => {
   const { key, mode, saga } = params;
