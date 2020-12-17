@@ -20,33 +20,33 @@ interface IParams {
   key: string;
   reducer: Reducer;
 }
-export default (params: IParams) => (WrappedComponent: ComponentType) => {
-  const { key, reducer } = params;
-  class ReducerInjector extends React.Component {
-    static WrappedComponent = WrappedComponent;
-    static displayName = `withReducer(${
-      WrappedComponent.displayName || WrappedComponent.name || "Component"
-    })`;
-    static contextTypes = {
-      // eslint-disable-next-line react/forbid-prop-types
-      store: PropTypes.object.isRequired,
-    };
+// export default (params: IParams) => (WrappedComponent: ComponentType) => {
+//   const { key, reducer } = params;
+//   class ReducerInjector extends React.Component {
+//     static WrappedComponent = WrappedComponent;
+//     static displayName = `withReducer(${
+//       WrappedComponent.displayName || WrappedComponent.name || "Component"
+//     })`;
+//     static contextTypes = {
+//       // eslint-disable-next-line react/forbid-prop-types
+//       store: PropTypes.object.isRequired,
+//     };
 
-    // eslint-disable-next-line camelcase
-    UNSAFE_componentWillMount() {
-      const { injectReducer } = this.injectors;
+//     // eslint-disable-next-line camelcase
+//     UNSAFE_componentWillMount() {
+//       const { injectReducer } = this.injectors;
 
-      injectReducer(key, reducer);
-    }
+//       injectReducer(key, reducer);
+//     }
 
-    injectors = getInjectors(this.context.store);
-    render() {
-      return <WrappedComponent {...this.props} />;
-    }
-  }
+//     injectors = getInjectors(this.context.store);
+//     render() {
+//       return <WrappedComponent {...this.props} />;
+//     }
+//   }
 
-  return hoistNonReactStatics(ReducerInjector, WrappedComponent);
-};
+//   return hoistNonReactStatics(ReducerInjector, WrappedComponent);
+// };
 
 const useInjectReducer = (params: IParams) => {
   const { key, reducer } = params;
